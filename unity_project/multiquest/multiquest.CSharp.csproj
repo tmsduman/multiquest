@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.3.2p3</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -57,12 +59,6 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -72,17 +68,17 @@
     <Reference Include="UnityEditor.iOS.Extensions.Common">
       <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
     </Reference>
-    <Reference Include="DOTween43">
-      <HintPath>Assets\DOTween\DOTween43.dll</HintPath>
-    </Reference>
     <Reference Include="DOTween">
       <HintPath>Assets\DOTween\DOTween.dll</HintPath>
     </Reference>
-    <Reference Include="DOTween50">
-      <HintPath>Assets\DOTween\DOTween50.dll</HintPath>
+    <Reference Include="DOTween43">
+      <HintPath>Assets\DOTween\DOTween43.dll</HintPath>
     </Reference>
     <Reference Include="DOTween46">
       <HintPath>Assets\DOTween\DOTween46.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween50">
+      <HintPath>Assets\DOTween\DOTween50.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +92,11 @@
     <Compile Include="Assets\Scripts\Infrastructure\AssetBundleManager\MonoBehaviours\AssetBundleManagerSingleton.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\AssetBundleVersionManager\AssetBundleVersionManager.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\FPS.cs" />
+    <Compile Include="Assets\Scripts\MVC\Controller\Input\Command\RegisterInputCommandCommand.cs" />
+    <Compile Include="Assets\Scripts\MVC\Controller\Input\Command\UnregisterInputCommandCommand.cs" />
+    <Compile Include="Assets\Scripts\MVC\Controller\Input\InputModule.cs" />
+    <Compile Include="Assets\Scripts\MVC\Controller\Input\Notifications\RegisterInputCommandNotification.cs" />
+    <Compile Include="Assets\Scripts\MVC\Controller\Input\Notifications\UnregisterInputCommandNotification.cs" />
     <Compile Include="Assets\Scripts\MVC\Core\PureMVC\Core\Controller.cs" />
     <Compile Include="Assets\Scripts\MVC\Core\PureMVC\Core\Model.cs" />
     <Compile Include="Assets\Scripts\MVC\Core\PureMVC\Core\View.cs" />
@@ -126,6 +127,9 @@
     <Compile Include="Assets\Scripts\MVC\Core\PureMVCImplementations\UnityProxy.cs" />
     <Compile Include="Assets\Scripts\MVC\MultiquestInitializer.cs" />
     <Compile Include="Assets\Scripts\MVC\UnityUpdateHandler.cs" />
+    <Compile Include="Assets\Scripts\MVC\View\Characters\CharacterMediator.cs" />
+    <Compile Include="Assets\Scripts\MVC\View\Characters\Data\RepresentationMovementDirections.cs" />
+    <Compile Include="Assets\Scripts\MVC\View\Characters\MonoBehaviours\CharacterRepresentation.cs" />
     <Compile Include="Assets\Scripts\TreeSharp\Action.cs" />
     <Compile Include="Assets\Scripts\TreeSharp\BehaviourTest.cs" />
     <Compile Include="Assets\Scripts\TreeSharp\BehaviourTreeManager.cs" />

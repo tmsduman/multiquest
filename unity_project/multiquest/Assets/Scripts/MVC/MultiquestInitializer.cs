@@ -33,7 +33,7 @@ namespace MVC
 
         private void InitializeModules()
         {
-            
+            new MVC.Controller.Input.InputModule(this);
         }
 
         private void InitializeMediators()
