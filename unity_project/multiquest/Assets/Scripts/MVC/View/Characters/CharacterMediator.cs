@@ -32,7 +32,7 @@ namespace MVC.View.Characters
                 InputName = "Left",
                 Command = () =>
                 {
-                    representation.Move(Data.RepresentationMovementDirections.Left);
+                    representation.Move(Data.RepresentationPossibleDirections.Left);
                 }
             });
 
@@ -41,7 +41,7 @@ namespace MVC.View.Characters
                 InputName = "Right",
                 Command = () =>
                 {
-                    representation.Move(Data.RepresentationMovementDirections.Right);
+                    representation.Move(Data.RepresentationPossibleDirections.Right);
                 }
             });
 
@@ -50,7 +50,7 @@ namespace MVC.View.Characters
                 InputName = "Up",
                 Command = () =>
                 {
-                    representation.Move(Data.RepresentationMovementDirections.Up);
+                    representation.Move(Data.RepresentationPossibleDirections.Up);
                 }
             });
 
@@ -59,7 +59,16 @@ namespace MVC.View.Characters
                 InputName = "Down",
                 Command = () =>
                 {
-                    representation.Move(Data.RepresentationMovementDirections.Down);
+                    representation.Move(Data.RepresentationPossibleDirections.Down);
+                }
+            });
+
+            this.SendNotification(new RegisterInputCommandNotification()
+            {
+                InputName = "Attack",
+                Command = () =>
+                {
+                    representation.Attack();
                 }
             });
         }

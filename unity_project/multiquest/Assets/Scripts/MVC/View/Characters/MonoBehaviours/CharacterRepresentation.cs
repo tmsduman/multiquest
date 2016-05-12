@@ -38,13 +38,13 @@ namespace MVC.View.Characters.MonoBehaviours
         [SerializeField]
         private Animator moveAnimator;
 
-        private Data.RepresentationMovementDirections previousDirection;
+        private Data.RepresentationPossibleDirections previousDirection;
 
         private bool nextActionPossible = true;
 
         private struct DirectionBlockedData
         {
-            public RepresentationMovementDirections Direction;
+            public RepresentationPossibleDirections Direction;
             public Collider2D Collider;
         }
 
@@ -56,54 +56,37 @@ namespace MVC.View.Characters.MonoBehaviours
             
         }
 
-        public void Move(RepresentationMovementDirections direction)
+        #region move
+
+        public void Move(RepresentationPossibleDirections direction)
         {
             if (!this.nextActionPossible)
                 return;
-
             this.nextActionPossible = false;
 
             if (direction != this.previousDirection)
             {
                 this.previousDirection = direction;
-
-                switch (direction)
-                {
-                    case RepresentationMovementDirections.Left:
-                        this.moveAnimator.SetTrigger("IdleLeft");
-                        break;
-                    case RepresentationMovementDirections.Right:
-                        this.moveAnimator.SetTrigger("IdleRight");
-                        break;
-                    case RepresentationMovementDirections.Up:
-                        this.moveAnimator.SetTrigger("IdleUp");
-                        break;
-                    case RepresentationMovementDirections.Down:
-                        this.moveAnimator.SetTrigger("IdleDown");
-                        break;
-                }
+                this.moveAnimator.SetTrigger("Idle" + direction);
             }
             else
             {
                 if (!this.blockedDirections.Any(e => e.Direction == direction))
                 {
+                    this.moveAnimator.SetTrigger("Move" + direction);
                     switch (direction)
                     {
-                        case RepresentationMovementDirections.Left:
+                        case RepresentationPossibleDirections.Left:
                             this.CachedTransform.DOLocalMoveX(this.CachedTransform.localPosition.x - this.movementLength, this.movementTime);
-                            this.moveAnimator.SetTrigger("MoveLeft");
                             break;
-                        case RepresentationMovementDirections.Right:
+                        case RepresentationPossibleDirections.Right:
                             this.CachedTransform.DOLocalMoveX(this.CachedTransform.localPosition.x + this.movementLength, this.movementTime);
-                            this.moveAnimator.SetTrigger("MoveRight");
                             break;
-                        case RepresentationMovementDirections.Up:
+                        case RepresentationPossibleDirections.Up:
                             this.CachedTransform.DOLocalMoveY(this.CachedTransform.localPosition.y + this.movementLength, this.movementTime);
-                            this.moveAnimator.SetTrigger("MoveUp");
                             break;
-                        case RepresentationMovementDirections.Down:
+                        case RepresentationPossibleDirections.Down:
                             this.CachedTransform.DOLocalMoveY(this.CachedTransform.localPosition.y - this.movementLength, this.movementTime);
-                            this.moveAnimator.SetTrigger("MoveDown");
                             break;
                     }
                 }
@@ -117,6 +100,10 @@ namespace MVC.View.Characters.MonoBehaviours
             yield return new WaitForSeconds(this.movementTime);
             this.nextActionPossible = true;
         }
+
+        #endregion
+
+        #region collision
 
         public void OnCollisionEnter2D(Collision2D collision)
         {
@@ -132,13 +119,13 @@ namespace MVC.View.Characters.MonoBehaviours
                 if (collision.transform.position.x > this.CachedTransform.position.x)
                     this.blockedDirections.Add(new DirectionBlockedData()
                     {
-                        Direction = RepresentationMovementDirections.Right,
+                        Direction = RepresentationPossibleDirections.Right,
                         Collider = collision.collider
                     });
                 else
                     this.blockedDirections.Add(new DirectionBlockedData()
                     {
-                        Direction = RepresentationMovementDirections.Left,
+                        Direction = RepresentationPossibleDirections.Left,
                         Collider = collision.collider
                     });
             }
@@ -147,13 +134,13 @@ namespace MVC.View.Characters.MonoBehaviours
                 if (collision.transform.position.y > this.CachedTransform.position.y)
                     this.blockedDirections.Add(new DirectionBlockedData()
                     {
-                        Direction = RepresentationMovementDirections.Up,
+                        Direction = RepresentationPossibleDirections.Up,
                         Collider = collision.collider
                     });
                 else
                     this.blockedDirections.Add(new DirectionBlockedData()
                     {
-                        Direction = RepresentationMovementDirections.Down,
+                        Direction = RepresentationPossibleDirections.Down,
                         Collider = collision.collider
                     });
             }
@@ -188,6 +175,24 @@ namespace MVC.View.Characters.MonoBehaviours
 	        {
 		        this.blockedDirections.Remove(item);
 	        }
+        }
+
+        #endregion
+
+        public void Attack()
+        {
+            this.Attack(this.previousDirection);
+        }
+
+        public void Attack(RepresentationPossibleDirections direction)
+        {
+            if (!this.nextActionPossible)
+                return;
+            this.nextActionPossible = false;
+
+            this.moveAnimator.SetTrigger("Attack" + direction);
+            
+            this.StartCoroutine(this.WaitForNextAction());
         }
     }
 }

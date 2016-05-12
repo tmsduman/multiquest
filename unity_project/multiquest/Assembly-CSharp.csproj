@@ -91,8 +91,9 @@
      <Compile Include="Assets\Scripts\MVC\MultiquestInitializer.cs" />
      <Compile Include="Assets\Scripts\MVC\UnityUpdateHandler.cs" />
      <Compile Include="Assets\Scripts\MVC\View\Characters\CharacterMediator.cs" />
-     <Compile Include="Assets\Scripts\MVC\View\Characters\Data\RepresentationMovementDirections.cs" />
+     <Compile Include="Assets\Scripts\MVC\View\Characters\Data\RepresentationPossibleDirections.cs" />
      <Compile Include="Assets\Scripts\MVC\View\Characters\MonoBehaviours\CharacterRepresentation.cs" />
+     <Compile Include="Assets\Scripts\MVC\View\Characters\MonoBehaviours\WeaponRepresentation.cs" />
      <Compile Include="Assets\Scripts\TreeSharp\Action.cs" />
      <Compile Include="Assets\Scripts\TreeSharp\BehaviourTest.cs" />
      <Compile Include="Assets\Scripts\TreeSharp\BehaviourTreeManager.cs" />
@@ -117,8 +118,10 @@
      <None Include="Assets\DOTween\DOTween43.xml" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDefault.shader" />
      <None Include="Assets\DOTween\readme.txt" />
+     <None Include="Assets\Tiled2Unity\Imported\forest-mod01.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Prefabs\_ReadMe.txt" />
      <None Include="Assets\Tiled2Unity\Shaders\shaTiledMap.shader" />
+     <None Include="Assets\Tiled2Unity\Imported\desertMap.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Tiled2Unity.export.txt" />
      <None Include="Assets\DOTween\DOTween46.xml" />
      <None Include="Assets\Tiled2Unity\Materials\_ReadMe.txt" />

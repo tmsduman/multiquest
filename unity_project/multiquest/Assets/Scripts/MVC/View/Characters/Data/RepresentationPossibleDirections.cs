@@ -1,6 +1,6 @@
 ﻿namespace MVC.View.Characters.Data
 {
-    public enum RepresentationMovementDirections
+    public enum RepresentationPossibleDirections
     {
         Left,
         Right,
