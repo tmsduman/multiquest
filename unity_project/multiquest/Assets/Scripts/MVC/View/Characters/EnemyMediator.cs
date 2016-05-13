@@ -30,8 +30,6 @@ namespace MVC.View.Characters
 			}
 		}
 
-
-
 		private void CreateNewNPC(NPCRepresentation representationPrefab, int id)
 		{
 			NPCRepresentation representation = Instantiate<NPCRepresentation>(representationPrefab);

@@ -53,8 +53,6 @@ namespace MVC.View.Camera
 
         private void HandlePlayerMoved()
         {
-            //return;
-
             if (this.registeredPlayers.Count == 0)
                 return;
 
