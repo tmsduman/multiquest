@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using MVC.Controller.Input.Notifications;
+﻿using MVC.Controller.Input.Notifications;
 using MVC.Model.Character;
-using MVC.View.Characters.Data;
 using MVC.View.Characters.MonoBehaviours;
 using UnityEngine;
 
@@ -19,12 +17,6 @@ namespace MVC.View.Characters
         private UnityEngine.Camera gameCamera;
 
         private CharacterProxy characterProxy;
-
-        protected override void Awake()
-        {
-            base.Awake();
-            
-        }
 
         private void Start()
         {
@@ -44,6 +36,9 @@ namespace MVC.View.Characters
             representation.CachedTransform.localPosition = new Vector3(1,1,0) * id * 2;
 
             representation.SetCamera(this.gameCamera);
+            representation.Killed += this.PlayerKilled;
+
+            representation.InputId = id;
 
             this.SendNotification(new RegisterInputCommandNotification()
             {
@@ -91,6 +86,18 @@ namespace MVC.View.Characters
             });
 
             this.characterProxy.AddPlayer(representation);
+        }
+
+        private void PlayerKilled(CharacterRepresentation representation)
+        {
+            representation.Killed -= this.PlayerKilled;
+
+            this.characterProxy.RemovePlayer(representation as PlayerRepresentation);
+
+            this.SendNotification(new UnregisterInputCommandNotification() { InputName = "Left" + representation.InputId });
+            this.SendNotification(new UnregisterInputCommandNotification() { InputName = "Right" + representation.InputId });
+            this.SendNotification(new UnregisterInputCommandNotification() { InputName = "Up" + representation.InputId });
+            this.SendNotification(new UnregisterInputCommandNotification() { InputName = "Down" + representation.InputId });
         }
     }
 }

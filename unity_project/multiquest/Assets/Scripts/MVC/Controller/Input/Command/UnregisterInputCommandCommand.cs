@@ -14,7 +14,7 @@ namespace MVC.Controller.Input.Command
         public override void Execute(PureMVC.Interfaces.INotification notification)
         {
             UnregisterInputCommandNotification n = (UnregisterInputCommandNotification)notification;
-            this.module.RegisterCommand(n.InputName, n.Command);
+            this.module.UnregisterCommand(n.InputName);
         }
     }
 }

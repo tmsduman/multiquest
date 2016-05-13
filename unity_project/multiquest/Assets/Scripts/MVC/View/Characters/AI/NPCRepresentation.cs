@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using TreeSharp;
-using MVC.View.Characters.AI.Behaviours;
-using UnityEngine;
+﻿using MVC.View.Characters.AI.Behaviours;
 using MVC.View.Characters.MonoBehaviours;
+using TreeSharp;
 
 namespace MVC.View.Characters.AI
 {
@@ -33,9 +28,11 @@ namespace MVC.View.Characters.AI
 			manager.RegisterBehaviour(this.behaviour, this);
 		}
 
-		private void OnDisable(){
-			manager.UnregisterBehaviour (this.behaviour);
-		}
+		protected override void OnDisable()
+        {
+            manager.UnregisterBehaviour(this.behaviour);
+            base.OnDisable();
+        }
 
 		public Composite GetComposite()
 		{
@@ -46,8 +43,5 @@ namespace MVC.View.Characters.AI
 			return this.facade;
 		}
 	}
-
-		
-
 }
 
