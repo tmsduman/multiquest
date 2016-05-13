@@ -28,7 +28,7 @@ namespace MVC
 
         private void InitializeProxies()
         {
-            
+            this.Facade.RegisterProxy(new MVC.Model.Character.CharacterProxy());
         }
 
         private void InitializeModules()
