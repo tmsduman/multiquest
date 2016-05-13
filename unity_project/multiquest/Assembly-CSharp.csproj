@@ -98,6 +98,7 @@
      <Compile Include="Assets\Scripts\MVC\View\Characters\AI\NPCRepresentation.cs" />
      <Compile Include="Assets\Scripts\MVC\View\Characters\CharacterMediator.cs" />
      <Compile Include="Assets\Scripts\MVC\View\Characters\Data\RepresentationPossibleDirections.cs" />
+     <Compile Include="Assets\Scripts\MVC\View\Characters\EnemyMediator.cs" />
      <Compile Include="Assets\Scripts\MVC\View\Characters\MonoBehaviours\CharacterRepresentation.cs" />
      <Compile Include="Assets\Scripts\MVC\View\Characters\MonoBehaviours\HealthInteractable.cs" />
      <Compile Include="Assets\Scripts\MVC\View\Characters\MonoBehaviours\WeaponRepresentation.cs" />

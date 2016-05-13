@@ -11,20 +11,23 @@ namespace MVC.View.Characters.AI
 {
 	public class NPCRepresentation : CharacterRepresentation
 	{
-		[SerializeField]
+		
 		private BehaviourTreeManager manager;
+
+		private PureMVCImplementations.UnityFacade facade;
 
 		public NPCRepresentation ()
 		{
 		}
 
-		public void Init(PureMVCImplementations.UnityFacade facade){
-			facade.GetProxy<MVC.Model.Character.CharacterProxy> ();
+		public void Init(PureMVCImplementations.UnityFacade facade,BehaviourTreeManager manager){
+			this.facade = facade;
+			this.manager = manager;
 		}
 
 		private void Start()
 		{
-			manager.RegisterBehaviour(this.GetComposite(), null);
+			manager.RegisterBehaviour(this.GetComposite(), this.facade);
 		}
 
 		public Composite GetComposite()
