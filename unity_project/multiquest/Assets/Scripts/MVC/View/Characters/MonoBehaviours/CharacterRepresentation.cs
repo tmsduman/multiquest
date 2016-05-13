@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 namespace MVC.View.Characters.MonoBehaviours
 {
@@ -54,11 +55,6 @@ namespace MVC.View.Characters.MonoBehaviours
         private List<DirectionBlockedData> blockedDirections = new List<DirectionBlockedData>();
         private List<Collider2D> wasStayRemoveBefore = new List<Collider2D>();
 
-        private void Awake()
-        {
-            
-        }
-
         #region move
 
         public void Move(RepresentationPossibleDirections direction)
@@ -92,10 +88,16 @@ namespace MVC.View.Characters.MonoBehaviours
                             this.CachedTransform.DOLocalMoveY(this.CachedTransform.localPosition.y - this.movementLength, this.movementTime);
                             break;
                     }
+
+                    this.OnMoved(direction);
                 }
             }
 
             this.StartCoroutine(this.WaitForNextAction(this.movementTime));
+        }
+
+        protected virtual void OnMoved(RepresentationPossibleDirections direction)
+        {
         }
 
         private IEnumerator WaitForNextAction(float waitTime)
@@ -187,7 +189,7 @@ namespace MVC.View.Characters.MonoBehaviours
             this.Attack(this.previousDirection);
         }
 
-        public void Attack(RepresentationPossibleDirections direction)
+        public virtual void Attack(RepresentationPossibleDirections direction)
         {
             if (!this.nextActionPossible)
                 return;
