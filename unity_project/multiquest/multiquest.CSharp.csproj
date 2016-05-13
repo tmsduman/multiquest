@@ -91,10 +91,14 @@
     <Compile Include="Assets\Scripts\Infrastructure\AssetBundleManager\MonoBehaviours\AssetBundleManagerSingleton.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\AssetBundleVersionManager\AssetBundleVersionManager.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\FPS.cs" />
+    <Compile Include="Assets\Scripts\MVC\Controller\Input\Command\RegisterAxisInputCommandCommand.cs" />
     <Compile Include="Assets\Scripts\MVC\Controller\Input\Command\RegisterInputCommandCommand.cs" />
+    <Compile Include="Assets\Scripts\MVC\Controller\Input\Command\UnregisterAxisInputCommandCommand.cs" />
     <Compile Include="Assets\Scripts\MVC\Controller\Input\Command\UnregisterInputCommandCommand.cs" />
     <Compile Include="Assets\Scripts\MVC\Controller\Input\InputModule.cs" />
+    <Compile Include="Assets\Scripts\MVC\Controller\Input\Notifications\RegisterAxisInputCommandNotification.cs" />
     <Compile Include="Assets\Scripts\MVC\Controller\Input\Notifications\RegisterInputCommandNotification.cs" />
+    <Compile Include="Assets\Scripts\MVC\Controller\Input\Notifications\UnregisterAxisInputCommandNotification.cs" />
     <Compile Include="Assets\Scripts\MVC\Controller\Input\Notifications\UnregisterInputCommandNotification.cs" />
     <Compile Include="Assets\Scripts\MVC\Core\PureMVC\Core\Controller.cs" />
     <Compile Include="Assets\Scripts\MVC\Core\PureMVC\Core\Model.cs" />
