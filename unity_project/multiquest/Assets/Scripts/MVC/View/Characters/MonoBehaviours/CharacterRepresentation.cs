@@ -68,7 +68,7 @@ namespace MVC.View.Characters.MonoBehaviours
 
         #region move
 
-		public virtual void Move(RepresentationPossibleDirections direction)
+        public virtual void Move(RepresentationPossibleDirections direction)
         {
             if (!this.nextActionPossible)
                 return;
@@ -123,6 +123,9 @@ namespace MVC.View.Characters.MonoBehaviours
 
         public void OnCollisionEnter2D(Collision2D collision)
         {
+            if (collision.collider.gameObject.GetComponent<WeaponRepresentation>() != null)
+                return;
+
             if (this.wasStayRemoveBefore.Contains(collision.collider))
                 this.wasStayRemoveBefore.Remove(collision.collider);
 
@@ -133,6 +136,9 @@ namespace MVC.View.Characters.MonoBehaviours
                     this.wasStayRemoveBefore.Add(collision.collider);
                 return;
             }
+
+            if (this.blockedDirections.Any(e => e.Collider == collision.collider))
+                return;
 
             if (collision.contacts[0].point.x == collision.contacts[1].point.x)
             {
@@ -164,15 +170,21 @@ namespace MVC.View.Characters.MonoBehaviours
                         Collider = collision.collider
                     });
             }
+
+            //Debug.Log("add " + collision.collider.gameObject.name + " " + this.gameObject.name);
         }
 
         public void OnCollisionStay2D(Collision2D collision)
         {
+            if (collision.gameObject.GetComponent<WeaponRepresentation>() != null)
+                return;
+
             if (Mathf.Abs(collision.contacts[0].point.x - collision.contacts[1].point.x) < 0.1f
                 && Mathf.Abs(collision.contacts[0].point.y - collision.contacts[1].point.y) < 0.1f)
             {
                 foreach (var item in this.blockedDirections.Where(e => e.Collider == collision.collider).ToArray())
                 {
+                    //Debug.Log("remove stay " + collision.collider.gameObject.name + " " + this.gameObject.name);
                     this.blockedDirections.Remove(item);
                 }
 
@@ -187,11 +199,15 @@ namespace MVC.View.Characters.MonoBehaviours
 
         public void OnCollisionExit2D(Collision2D collision)
         {
+            if (collision.collider.gameObject.GetComponent<WeaponRepresentation>() != null)
+                return;
+
             if (this.wasStayRemoveBefore.Contains(collision.collider))
                 this.wasStayRemoveBefore.Remove(collision.collider);
             
             foreach (var item in this.blockedDirections.Where(e => e.Collider == collision.collider).ToArray())
             {
+                //Debug.Log("remove exit " + collision.collider.gameObject.name + " " + this.gameObject.name);
                 this.blockedDirections.Remove(item);
             }
         }
