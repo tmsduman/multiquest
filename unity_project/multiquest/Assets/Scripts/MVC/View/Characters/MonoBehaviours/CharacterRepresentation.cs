@@ -38,6 +38,9 @@ namespace MVC.View.Characters.MonoBehaviours
         [SerializeField]
         private Animator moveAnimator;
 
+        [SerializeField]
+        private float attackTime;
+
         private Data.RepresentationPossibleDirections previousDirection;
 
         private bool nextActionPossible = true;
@@ -92,12 +95,12 @@ namespace MVC.View.Characters.MonoBehaviours
                 }
             }
 
-            this.StartCoroutine(this.WaitForNextAction());
+            this.StartCoroutine(this.WaitForNextAction(this.movementTime));
         }
 
-        private IEnumerator WaitForNextAction()
+        private IEnumerator WaitForNextAction(float waitTime)
         {
-            yield return new WaitForSeconds(this.movementTime);
+            yield return new WaitForSeconds(waitTime);
             this.nextActionPossible = true;
         }
 
@@ -192,7 +195,7 @@ namespace MVC.View.Characters.MonoBehaviours
 
             this.moveAnimator.SetTrigger("Attack" + direction);
             
-            this.StartCoroutine(this.WaitForNextAction());
+            this.StartCoroutine(this.WaitForNextAction(this.attackTime));
         }
     }
 }

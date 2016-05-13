@@ -90,9 +90,11 @@
      <Compile Include="Assets\Scripts\MVC\Core\PureMVCImplementations\UnityProxy.cs" />
      <Compile Include="Assets\Scripts\MVC\MultiquestInitializer.cs" />
      <Compile Include="Assets\Scripts\MVC\UnityUpdateHandler.cs" />
+     <Compile Include="Assets\Scripts\MVC\View\Bases\IInteractableRepresentation.cs" />
      <Compile Include="Assets\Scripts\MVC\View\Characters\CharacterMediator.cs" />
      <Compile Include="Assets\Scripts\MVC\View\Characters\Data\RepresentationPossibleDirections.cs" />
      <Compile Include="Assets\Scripts\MVC\View\Characters\MonoBehaviours\CharacterRepresentation.cs" />
+     <Compile Include="Assets\Scripts\MVC\View\Characters\MonoBehaviours\HealthInteractable.cs" />
      <Compile Include="Assets\Scripts\MVC\View\Characters\MonoBehaviours\WeaponRepresentation.cs" />
      <Compile Include="Assets\Scripts\TreeSharp\Action.cs" />
      <Compile Include="Assets\Scripts\TreeSharp\BehaviourTest.cs" />
