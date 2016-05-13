@@ -1,4 +1,5 @@
 ﻿using MVC.Controller.Input.Notifications;
+using MVC.Model.Character;
 using MVC.View.Characters.MonoBehaviours;
 using UnityEngine;
 
@@ -11,6 +12,14 @@ namespace MVC.View.Characters
 
         [SerializeField]
         private CharacterRepresentation characterPrefab;
+
+        private CharacterProxy characterProxy;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            this.characterProxy = this.Facade.GetProxy<CharacterProxy>();
+        }
 
         private void Start()
         {
@@ -71,6 +80,8 @@ namespace MVC.View.Characters
                     representation.Attack();
                 }
             });
+
+            this.characterProxy.AddPlayer(representation);
         }
     }
 }
