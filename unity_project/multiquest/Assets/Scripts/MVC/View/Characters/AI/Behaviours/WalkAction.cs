@@ -32,23 +32,6 @@ namespace MVC.View.Characters.AI.Behaviours
 				npc.Move (currentDir);
 			}
 
-
-//			this.Unwrap (context).Move (this.lastRandomDirection);
-//
-//
-//			RepresentationPossibleDirections currentDir = directions [UnityEngine.Random.Range (0, directions.Count - 1)];
-//
-//			if (this.Unwrap (context).previousDirection == currentDir) {
-//				
-//			}
-//
-//			if (currentDir != this.lastRandomDirection && this.lastRandomDirection != null) {
-//			}
-
-//			this.lastRandomDirection = currentDir;
-
-			
-
 			return RunStatus.Success;
 		}
 	}

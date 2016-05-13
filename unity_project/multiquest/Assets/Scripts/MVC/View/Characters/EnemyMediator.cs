@@ -1,9 +1,8 @@
-﻿using MVC.Controller.Input.Notifications;
-using MVC.Model.Character;
-using MVC.View.Characters.MonoBehaviours;
+﻿using MVC.Model.Character;
 using MVC.View.Characters.AI;
-using UnityEngine;
+using MVC.View.Characters.MonoBehaviours;
 using TreeSharp;
+using UnityEngine;
 
 namespace MVC.View.Characters
 {
