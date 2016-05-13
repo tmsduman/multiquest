@@ -37,7 +37,7 @@ namespace MVC.View.Characters
 			NPCRepresentation representation = Instantiate<NPCRepresentation>(representationPrefab);
 			representation.CachedTransform.SetParent(this.characterParent);
 			representation.CachedTransform.localScale = Vector3.one;
-			representation.CachedTransform.localPosition = Vector3.one * 200;
+			representation.CachedTransform.localPosition = new Vector3(1,1,0) * -2;
 			representation.Init (this.Facade, this.manager);
 
 
