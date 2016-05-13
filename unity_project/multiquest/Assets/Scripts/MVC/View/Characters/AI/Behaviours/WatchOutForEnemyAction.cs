@@ -19,7 +19,7 @@ namespace MVC.View.Characters.AI.Behaviours
 					return RunStatus.Success;
 				}
 			}
-
+			Debug.Log ("watch out for enemy");
 			return RunStatus.Failure;
 		}
 	}
