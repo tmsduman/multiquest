@@ -13,7 +13,7 @@ namespace MVC.View.Characters.AI
 	{
 		
 		private BehaviourTreeManager manager;
-
+		private Composite behaviour;
 		private PureMVCImplementations.UnityFacade facade;
 
 		public NPCRepresentation ()
@@ -27,12 +27,17 @@ namespace MVC.View.Characters.AI
 
 		private void Start()
 		{
-			manager.RegisterBehaviour(this.GetComposite(), this);
+			this.behaviour = this.GetComposite ();
+			manager.RegisterBehaviour(this.behaviour, this);
+		}
+
+		private void OnDisable(){
+			manager.UnregisterBehaviour (this.behaviour);
 		}
 
 		public Composite GetComposite()
 		{
-			return new PrioritySelector(new Sequence(new GoToEnemyAction(),new AttackAction()),new WalkAction ());
+			return new PrioritySelector(new PrioritySelector(new AttackAction(),new GoToEnemyAction()),new WalkAction ());
 		}
 
 		public PureMVCImplementations.UnityFacade GetFacade(){

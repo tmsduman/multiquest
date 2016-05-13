@@ -46,13 +46,13 @@ namespace MVC.View.Characters.MonoBehaviours
 
         private bool nextActionPossible = true;
 
-        private struct DirectionBlockedData
+        public struct DirectionBlockedData
         {
             public RepresentationPossibleDirections Direction;
             public Collider2D Collider;
         }
 
-        private List<DirectionBlockedData> blockedDirections = new List<DirectionBlockedData>();
+        public List<DirectionBlockedData> blockedDirections = new List<DirectionBlockedData>();
         private List<Collider2D> wasStayRemoveBefore = new List<Collider2D>();
 
         #region move
