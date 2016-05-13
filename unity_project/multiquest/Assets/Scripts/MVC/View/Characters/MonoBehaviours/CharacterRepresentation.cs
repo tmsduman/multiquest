@@ -197,5 +197,15 @@ namespace MVC.View.Characters.MonoBehaviours
 
             this.StartCoroutine(this.WaitForNextAction(this.attackTime));
         }
+
+		public bool IsBlockedDirection (RepresentationPossibleDirections dir) {
+			foreach (DirectionBlockedData item in this.blockedDirections) {
+				if (dir == item.Direction) {
+					return true;
+				}
+			}
+
+			return false;
+		}
     }
 }
