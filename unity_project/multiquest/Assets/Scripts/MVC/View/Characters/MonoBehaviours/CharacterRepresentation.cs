@@ -28,7 +28,7 @@ namespace MVC.View.Characters.MonoBehaviours
         private float size;
 
         [SerializeField]
-        private float movementLength;
+        protected float movementLength;
 
         [SerializeField]
         private float movementTime;
@@ -57,7 +57,7 @@ namespace MVC.View.Characters.MonoBehaviours
 
         #region move
 
-        public void Move(RepresentationPossibleDirections direction)
+        public virtual void Move(RepresentationPossibleDirections direction)
         {
             if (!this.nextActionPossible)
                 return;
@@ -200,14 +200,14 @@ namespace MVC.View.Characters.MonoBehaviours
             this.StartCoroutine(this.WaitForNextAction(this.attackTime));
         }
 
-		public bool IsBlockedDirection (RepresentationPossibleDirections dir) {
-			foreach (DirectionBlockedData item in this.blockedDirections) {
-				if (dir == item.Direction) {
-					return true;
-				}
-			}
+        public bool IsBlockedDirection (RepresentationPossibleDirections dir) {
+            foreach (DirectionBlockedData item in this.blockedDirections) {
+                if (dir == item.Direction) {
+                    return true;
+                }
+            }
 
-			return false;
-		}
+            return false;
+        }
     }
 }

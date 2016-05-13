@@ -15,6 +15,9 @@ namespace MVC.View.Characters
         [SerializeField]
         private PlayerRepresentation characterPrefab;
 
+        [SerializeField]
+        private UnityEngine.Camera gameCamera;
+
         private CharacterProxy characterProxy;
 
         protected override void Awake()
@@ -39,6 +42,8 @@ namespace MVC.View.Characters
             representation.CachedTransform.SetParent(this.characterParent);
             representation.CachedTransform.localScale = Vector3.one;
             representation.CachedTransform.localPosition = new Vector3(1,1,0) * id * 2;
+
+            representation.SetCamera(this.gameCamera);
 
             this.SendNotification(new RegisterInputCommandNotification()
             {
