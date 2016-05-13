@@ -41,7 +41,7 @@ namespace MVC.View.Characters
 			representation.Init (this.Facade, this.manager);
 
 
-			this.characterProxy.AddPlayer(representation);
+			this.characterProxy.AddEnemy(representation);
 		}
 	}
 }

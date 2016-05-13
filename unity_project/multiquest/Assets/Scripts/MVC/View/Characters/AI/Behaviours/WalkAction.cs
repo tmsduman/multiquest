@@ -1,16 +1,21 @@
-﻿using TreeSharp;
+﻿using System;
+using System.Collections.Generic;
+using TreeSharp;
+using MVC.View.Characters.Data;
 
 namespace MVC.View.Characters.AI.Behaviours
 {
-	public class WalkAction : Action
+	public class WalkAction : AbstractAction
 	{
-		public WalkAction () : base((ActionSucceedDelegate)null)
-		{
-			
-		}
-
+		
 		protected override RunStatus Run(object context){
-			UnityEngine.Debug.Log ("walk around");
+			List<RepresentationPossibleDirections> directions = new List<RepresentationPossibleDirections> ();
+			Array uncastedDirections = Enum.GetValues (typeof(RepresentationPossibleDirections));
+			foreach (var item in uncastedDirections) {
+				directions.Add ((RepresentationPossibleDirections)item);
+			}
+
+			this.Unwrap (context).Move (directions[0]);
 			return RunStatus.Success;
 		}
 	}

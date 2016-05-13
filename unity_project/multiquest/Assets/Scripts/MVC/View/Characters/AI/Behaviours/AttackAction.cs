@@ -2,16 +2,13 @@
 
 namespace MVC.View.Characters.AI.Behaviours
 {
-	public class AttackAction : Action
+	public class AttackAction : AbstractAction
 	{
-		public AttackAction () : base((ActionSucceedDelegate)null)
-		{
-
-		}
+		
 
 		protected override RunStatus Run(object context){
 			UnityEngine.Debug.Log ("attack");
-			return RunStatus.Success;
+			return RunStatus.Failure;
 		}
 	}
 }

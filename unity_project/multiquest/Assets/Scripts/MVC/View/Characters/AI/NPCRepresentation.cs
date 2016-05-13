@@ -27,12 +27,16 @@ namespace MVC.View.Characters.AI
 
 		private void Start()
 		{
-			manager.RegisterBehaviour(this.GetComposite(), this.facade);
+			manager.RegisterBehaviour(this.GetComposite(), this);
 		}
 
 		public Composite GetComposite()
 		{
 			return new PrioritySelector(new Sequence(new GoToEnemyAction(),new AttackAction()),new WalkAction ());
+		}
+
+		public PureMVCImplementations.UnityFacade GetFacade(){
+			return this.facade;
 		}
 	}
 

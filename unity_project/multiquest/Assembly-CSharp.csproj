@@ -92,6 +92,7 @@
      <Compile Include="Assets\Scripts\MVC\MultiquestInitializer.cs" />
      <Compile Include="Assets\Scripts\MVC\UnityUpdateHandler.cs" />
      <Compile Include="Assets\Scripts\MVC\View\Bases\IInteractableRepresentation.cs" />
+     <Compile Include="Assets\Scripts\MVC\View\Characters\AI\Behaviours\AbstractAction.cs" />
      <Compile Include="Assets\Scripts\MVC\View\Characters\AI\Behaviours\AttackAction.cs" />
      <Compile Include="Assets\Scripts\MVC\View\Characters\AI\Behaviours\GoToEnemyAction.cs" />
      <Compile Include="Assets\Scripts\MVC\View\Characters\AI\Behaviours\WalkAction.cs" />
