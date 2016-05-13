@@ -44,7 +44,7 @@ namespace MVC.View.Characters.MonoBehaviours
         [SerializeField]
         private float attackTime;
 
-        private Data.RepresentationPossibleDirections previousDirection;
+        public Data.RepresentationPossibleDirections previousDirection;
 
         private bool nextActionPossible = true;
 
@@ -68,7 +68,7 @@ namespace MVC.View.Characters.MonoBehaviours
 
         #region move
 
-        public virtual void Move(RepresentationPossibleDirections direction)
+		public virtual void Move(RepresentationPossibleDirections direction)
         {
             if (!this.nextActionPossible)
                 return;

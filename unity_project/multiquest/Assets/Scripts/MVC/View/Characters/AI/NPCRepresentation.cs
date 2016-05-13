@@ -36,7 +36,16 @@ namespace MVC.View.Characters.AI
 
 		public Composite GetComposite()
 		{
-			return new PrioritySelector(new Sequence(new WatchOutForEnemyAction (), new PrioritySelector(new AttackAction(),new GoToEnemyAction()),new WalkAction ()));
+			return new PrioritySelector(
+				new Sequence(
+					new WatchOutForEnemyAction (), 
+					new PrioritySelector(
+						new AttackAction(),
+						new GoToEnemyAction()
+					)
+				),
+				new WalkAction ()
+			);
 		}
 
 		public PureMVCImplementations.UnityFacade GetFacade(){
