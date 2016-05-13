@@ -2,15 +2,15 @@
 
 namespace MVC.View.Characters.AI.Behaviours
 {
-	public class WalkAction : Action
+	public class AttackAction : Action
 	{
-		public WalkAction () : base((ActionSucceedDelegate)null)
+		public AttackAction () : base((ActionSucceedDelegate)null)
 		{
-			
+
 		}
 
 		protected override RunStatus Run(object context){
-			UnityEngine.Debug.Log ("walk around");
+			UnityEngine.Debug.Log ("attack");
 			return RunStatus.Success;
 		}
 	}
