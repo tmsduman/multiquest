@@ -24,6 +24,8 @@ namespace MVC.View.Characters.MonoBehaviours
         }
         #endregion
 
+        public event Action<CharacterRepresentation> Killed;
+
         [SerializeField]
         private float size;
 
@@ -46,6 +48,8 @@ namespace MVC.View.Characters.MonoBehaviours
 
         private bool nextActionPossible = true;
 
+        public int InputId;
+
         public struct DirectionBlockedData
         {
             public RepresentationPossibleDirections Direction;
@@ -54,6 +58,13 @@ namespace MVC.View.Characters.MonoBehaviours
 
         public List<DirectionBlockedData> blockedDirections = new List<DirectionBlockedData>();
         private List<Collider2D> wasStayRemoveBefore = new List<Collider2D>();
+
+        protected virtual void OnDisable()
+        {
+            var tempEvent = this.Killed;
+            if (tempEvent != null)
+                tempEvent(this);
+        }
 
         #region move
 

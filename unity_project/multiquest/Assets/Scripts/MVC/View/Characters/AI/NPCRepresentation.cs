@@ -1,51 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using TreeSharp;
-using MVC.View.Characters.AI.Behaviours;
-using UnityEngine;
+﻿using MVC.View.Characters.AI.Behaviours;
 using MVC.View.Characters.MonoBehaviours;
+using TreeSharp;
 
 namespace MVC.View.Characters.AI
 {
-	public class NPCRepresentation : CharacterRepresentation
-	{
-		
-		private BehaviourTreeManager manager;
-		private Composite behaviour;
-		private PureMVCImplementations.UnityFacade facade;
+    public class NPCRepresentation : CharacterRepresentation
+    {
+        
+        private BehaviourTreeManager manager;
+        private Composite behaviour;
+        private PureMVCImplementations.UnityFacade facade;
 
-		public NPCRepresentation ()
-		{
-		}
+        public NPCRepresentation ()
+        {
+        }
 
-		public void Init(PureMVCImplementations.UnityFacade facade,BehaviourTreeManager manager){
-			this.facade = facade;
-			this.manager = manager;
-		}
+        public void Init(PureMVCImplementations.UnityFacade facade,BehaviourTreeManager manager){
+            this.facade = facade;
+            this.manager = manager;
+        }
 
-		private void Start()
-		{
-			this.behaviour = this.GetComposite ();
-			manager.RegisterBehaviour(this.behaviour, this);
-		}
+        private void Start()
+        {
+            this.behaviour = this.GetComposite ();
+            manager.RegisterBehaviour(this.behaviour, this);
+        }
 
-		private void OnDisable(){
-			manager.UnregisterBehaviour (this.behaviour);
-		}
+        protected override void OnDisable()
+        {
+            manager.UnregisterBehaviour(this.behaviour);
+            base.OnDisable();
+        }
 
-		public Composite GetComposite()
-		{
-			return new PrioritySelector(new PrioritySelector(new AttackAction(),new GoToEnemyAction()),new WalkAction ());
-		}
+        public Composite GetComposite()
+        {
+            return new PrioritySelector(new PrioritySelector(new AttackAction(),new GoToEnemyAction()),new WalkAction ());
+        }
 
-		public PureMVCImplementations.UnityFacade GetFacade(){
-			return this.facade;
-		}
-	}
+        public PureMVCImplementations.UnityFacade GetFacade(){
+            return this.facade;
+        }
+    }
 
-		
+        
 
 }
 

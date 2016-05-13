@@ -19,7 +19,7 @@ namespace MVC.View.Characters.MonoBehaviours
         public void Interact(GameObject interactGameObject)
         {
             WeaponRepresentation weapon = interactGameObject.GetComponent<WeaponRepresentation>();
-            if(weapon != null)
+            if (weapon != null)
             {
                 this.actualHealth -= weapon.damagePerHit;
                 if (this.actualHealth <= 0)
