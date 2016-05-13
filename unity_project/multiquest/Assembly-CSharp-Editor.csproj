@@ -74,6 +74,7 @@
      <None Include="Assets\Tiled2Unity\Imported\desertMap.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Tiled2Unity.export.txt" />
      <None Include="Assets\Tiled2Unity\Imported\forest-mod04.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Imported\forest-mod14.tiled2unity.xml" />
      <None Include="Assets\DOTween\DOTween46.xml" />
      <None Include="Assets\Tiled2Unity\Imported\forest-mod11.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\forest-mod08.tiled2unity.xml" />

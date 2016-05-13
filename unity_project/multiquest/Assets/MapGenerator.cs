@@ -10,7 +10,15 @@ public class MapGenerator : MonoBehaviour {
 		startY = maxH / 2;
 
 		map = new int[maxW * maxH];
+		for (int i = 0; i < maxW * maxH; i++)
+			map [i] = 0;
+
 		rnd = new Random ();
+
+		generateMap (3);
+		createTiles ();
+
+		//GameObject obj = Instantiate (Resources.Load ("Tiles/forest-mod01")) as GameObject;
 	}
 	
 	// Update is called once per frame
@@ -54,7 +62,21 @@ public class MapGenerator : MonoBehaviour {
 		delete [] map;
 	}*/
 
+	private void printMap()
+	{
+		for(int j = 0; j < maxH; j++)
+		{
+			string line = "";
+			for(int i = 0; i < maxW; i++)
+			{
+				int codeP = getPointerTo(i, j);
+				line += map [codeP].ToString ("00");
 
+
+			}
+			Debug.Log (line);
+		}
+	}
 
 	private int getRandomBool()
 	{
@@ -63,7 +85,7 @@ public class MapGenerator : MonoBehaviour {
 
 	private int getPointerTo(int x, int y)
 	{
-		if((x < 0) || (x > maxW) || (y < 0) || (y > maxH))
+		if((x < 0) || (x >= maxW) || (y < 0) || (y >= maxH))
 			return -1;
 
 		return (y * maxW + x);
@@ -194,6 +216,7 @@ public class MapGenerator : MonoBehaviour {
 		//openedTiles.clear();
 		//openedTiles.insert(std::make_pair(startX, startY) );
 		//memset(map, 0, sizeof(int) * (maxW * maxH));
+		openedTiles = new HashSet<KeyValuePair<int, int>>();
 		openedTiles.Add(new KeyValuePair<int, int>(startX, startY) );
 
 		while (openedTiles.Count > 0)
@@ -208,6 +231,34 @@ public class MapGenerator : MonoBehaviour {
 			//openedTiles.erase(pair);
 			//generateCell(pair->first, pair->second);
 		}
+	}
+
+	void createTiles()
+	{
+		for (int y = 0; y < maxH; y++) {
+			for (int x = 0; x < maxW; x++) {
+				int pointer = getPointerTo (x, y);
+				int type = map [pointer];
+				if(type > 0)
+				{
+					if ((type == 15) && (getRandomBool () == 0))
+						type = 16;
+						
+
+					string fileName = "Tiles/forest-mod" + type.ToString("00");
+
+					Debug.Log ("x: " + x + " y: " + y + " filename: " + fileName);
+					GameObject obj = Instantiate (Resources.Load (fileName)) as GameObject;
+
+					Vector3 newPos = new Vector3(x * 641, y * 450, 0);
+
+					obj.transform.position = newPos;
+					//obj.GetComponent<Transform>().position.Set (x * 1282, y * 900, 0);
+				}
+
+			}
+		}
+
 	}
 
 }
