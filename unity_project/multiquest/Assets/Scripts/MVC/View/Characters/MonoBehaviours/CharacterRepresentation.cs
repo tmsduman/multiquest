@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 namespace MVC.View.Characters.MonoBehaviours
 {
@@ -23,11 +24,13 @@ namespace MVC.View.Characters.MonoBehaviours
         }
         #endregion
 
+        public event Action<CharacterRepresentation> Killed;
+
         [SerializeField]
         private float size;
 
         [SerializeField]
-        private float movementLength;
+        protected float movementLength;
 
         [SerializeField]
         private float movementTime;
@@ -41,27 +44,31 @@ namespace MVC.View.Characters.MonoBehaviours
         [SerializeField]
         private float attackTime;
 
-        private Data.RepresentationPossibleDirections previousDirection;
+        public Data.RepresentationPossibleDirections previousDirection;
 
         private bool nextActionPossible = true;
 
-        private struct DirectionBlockedData
+        public int InputId;
+
+        public struct DirectionBlockedData
         {
             public RepresentationPossibleDirections Direction;
             public Collider2D Collider;
         }
 
-        private List<DirectionBlockedData> blockedDirections = new List<DirectionBlockedData>();
+        public List<DirectionBlockedData> blockedDirections = new List<DirectionBlockedData>();
         private List<Collider2D> wasStayRemoveBefore = new List<Collider2D>();
 
-        private void Awake()
+        protected virtual void OnDisable()
         {
-            
+            var tempEvent = this.Killed;
+            if (tempEvent != null)
+                tempEvent(this);
         }
 
         #region move
 
-        public void Move(RepresentationPossibleDirections direction)
+		public virtual void Move(RepresentationPossibleDirections direction)
         {
             if (!this.nextActionPossible)
                 return;
@@ -92,10 +99,16 @@ namespace MVC.View.Characters.MonoBehaviours
                             this.CachedTransform.DOLocalMoveY(this.CachedTransform.localPosition.y - this.movementLength, this.movementTime);
                             break;
                     }
+
+                    this.OnMoved(direction);
                 }
             }
 
             this.StartCoroutine(this.WaitForNextAction(this.movementTime));
+        }
+
+        protected virtual void OnMoved(RepresentationPossibleDirections direction)
+        {
         }
 
         private IEnumerator WaitForNextAction(float waitTime)
@@ -155,9 +168,9 @@ namespace MVC.View.Characters.MonoBehaviours
                 && Mathf.Abs(collision.contacts[0].point.y - collision.contacts[1].point.y) < 1)
             {
                 foreach (var item in this.blockedDirections.Where(e => e.Collider == collision.collider).ToArray())
-	            {
-		            this.blockedDirections.Remove(item);
-	            }
+                {
+                    this.blockedDirections.Remove(item);
+                }
 
                 if(!this.wasStayRemoveBefore.Contains(collision.collider))
                     this.wasStayRemoveBefore.Add(collision.collider);
@@ -175,9 +188,9 @@ namespace MVC.View.Characters.MonoBehaviours
                 this.wasStayRemoveBefore.Remove(collision.collider);
             
             foreach (var item in this.blockedDirections.Where(e => e.Collider == collision.collider).ToArray())
-	        {
-		        this.blockedDirections.Remove(item);
-	        }
+            {
+                this.blockedDirections.Remove(item);
+            }
         }
 
         #endregion
@@ -187,15 +200,25 @@ namespace MVC.View.Characters.MonoBehaviours
             this.Attack(this.previousDirection);
         }
 
-        public void Attack(RepresentationPossibleDirections direction)
+        public virtual void Attack(RepresentationPossibleDirections direction)
         {
             if (!this.nextActionPossible)
                 return;
             this.nextActionPossible = false;
 
             this.moveAnimator.SetTrigger("Attack" + direction);
-            
+
             this.StartCoroutine(this.WaitForNextAction(this.attackTime));
+        }
+
+        public bool IsBlockedDirection (RepresentationPossibleDirections dir) {
+            foreach (DirectionBlockedData item in this.blockedDirections) {
+                if (dir == item.Direction) {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

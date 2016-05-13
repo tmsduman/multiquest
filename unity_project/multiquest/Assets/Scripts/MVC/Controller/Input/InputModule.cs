@@ -28,12 +28,11 @@ namespace MVC.Controller.Input
                 this.registeredCommands[inputName].Add(command);
         }
 
-        public void UnregisterCommand(string inputName, Action command)
+        public void UnregisterCommand(string inputName)
         {
             if (this.registeredCommands.ContainsKey(inputName))
             {
-                if (this.registeredCommands[inputName].Contains(command))
-                    this.registeredCommands[inputName].Remove(command);
+                this.registeredCommands.Remove(inputName);
             }
         }
 

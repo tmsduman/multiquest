@@ -15,9 +15,15 @@ namespace MVC.View.Characters.MonoBehaviours
 
         public void OnCollisionEnter2D(Collision2D collision)
         {
+            //Debug.Log("enter");
             IInteractableRepresentation interactable = collision.gameObject.GetComponent<IInteractableRepresentation>();
             if (interactable != null)
                 interactable.Interact(this.gameObject);
+        }
+
+        public void OnCollisionExit2D(Collision2D collision)
+        {
+            //Debug.Log("exit");
         }
     }
 }
