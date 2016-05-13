@@ -132,6 +132,7 @@
     <Compile Include="Assets\Scripts\MVC\View\Characters\AI\Behaviours\AttackAction.cs" />
     <Compile Include="Assets\Scripts\MVC\View\Characters\AI\Behaviours\GoToEnemyAction.cs" />
     <Compile Include="Assets\Scripts\MVC\View\Characters\AI\Behaviours\WalkAction.cs" />
+    <Compile Include="Assets\Scripts\MVC\View\Characters\AI\Behaviours\WatchOutForEnemyAction.cs" />
     <Compile Include="Assets\Scripts\MVC\View\Characters\AI\NPCRepresentation.cs" />
     <Compile Include="Assets\Scripts\MVC\View\Characters\CharacterMediator.cs" />
     <Compile Include="Assets\Scripts\MVC\View\Characters\Data\RepresentationPossibleDirections.cs" />

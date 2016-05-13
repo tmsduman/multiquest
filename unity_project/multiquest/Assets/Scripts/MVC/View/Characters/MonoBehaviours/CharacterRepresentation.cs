@@ -125,10 +125,14 @@ namespace MVC.View.Characters.MonoBehaviours
         {
             if (this.wasStayRemoveBefore.Contains(collision.collider))
                 this.wasStayRemoveBefore.Remove(collision.collider);
-            
-            if (Mathf.Abs(collision.contacts[0].point.x - collision.contacts[1].point.x) < 1
-                && Mathf.Abs(collision.contacts[0].point.y - collision.contacts[1].point.y) < 1)
+
+            if (Mathf.Abs(collision.contacts[0].point.x - collision.contacts[1].point.x) < 0.1f
+                && Mathf.Abs(collision.contacts[0].point.y - collision.contacts[1].point.y) < 0.1f)
+            {
+                if (!this.wasStayRemoveBefore.Contains(collision.collider))
+                    this.wasStayRemoveBefore.Add(collision.collider);
                 return;
+            }
 
             if (collision.contacts[0].point.x == collision.contacts[1].point.x)
             {
@@ -164,17 +168,16 @@ namespace MVC.View.Characters.MonoBehaviours
 
         public void OnCollisionStay2D(Collision2D collision)
         {
-            if (Mathf.Abs(collision.contacts[0].point.x - collision.contacts[1].point.x) < 1
-                && Mathf.Abs(collision.contacts[0].point.y - collision.contacts[1].point.y) < 1)
+            if (Mathf.Abs(collision.contacts[0].point.x - collision.contacts[1].point.x) < 0.1f
+                && Mathf.Abs(collision.contacts[0].point.y - collision.contacts[1].point.y) < 0.1f)
             {
                 foreach (var item in this.blockedDirections.Where(e => e.Collider == collision.collider).ToArray())
                 {
                     this.blockedDirections.Remove(item);
                 }
 
-                if(!this.wasStayRemoveBefore.Contains(collision.collider))
+                if (!this.wasStayRemoveBefore.Contains(collision.collider))
                     this.wasStayRemoveBefore.Add(collision.collider);
-
             }
             else if (this.wasStayRemoveBefore.Contains(collision.collider))
             {
