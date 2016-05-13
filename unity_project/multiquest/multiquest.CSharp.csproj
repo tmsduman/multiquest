@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.3.2p3</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -125,11 +123,15 @@
     <Compile Include="Assets\Scripts\MVC\Core\PureMVCImplementations\UnityMonoBehaviourMediator.cs" />
     <Compile Include="Assets\Scripts\MVC\Core\PureMVCImplementations\UnityNotification.cs" />
     <Compile Include="Assets\Scripts\MVC\Core\PureMVCImplementations\UnityProxy.cs" />
+    <Compile Include="Assets\Scripts\MVC\Model\Character\CharacterProxy.cs" />
     <Compile Include="Assets\Scripts\MVC\MultiquestInitializer.cs" />
     <Compile Include="Assets\Scripts\MVC\UnityUpdateHandler.cs" />
+    <Compile Include="Assets\Scripts\MVC\View\Bases\IInteractableRepresentation.cs" />
     <Compile Include="Assets\Scripts\MVC\View\Characters\CharacterMediator.cs" />
-    <Compile Include="Assets\Scripts\MVC\View\Characters\Data\RepresentationMovementDirections.cs" />
+    <Compile Include="Assets\Scripts\MVC\View\Characters\Data\RepresentationPossibleDirections.cs" />
     <Compile Include="Assets\Scripts\MVC\View\Characters\MonoBehaviours\CharacterRepresentation.cs" />
+    <Compile Include="Assets\Scripts\MVC\View\Characters\MonoBehaviours\HealthInteractable.cs" />
+    <Compile Include="Assets\Scripts\MVC\View\Characters\MonoBehaviours\WeaponRepresentation.cs" />
     <Compile Include="Assets\Scripts\TreeSharp\Action.cs" />
     <Compile Include="Assets\Scripts\TreeSharp\BehaviourTest.cs" />
     <Compile Include="Assets\Scripts\TreeSharp\BehaviourTreeManager.cs" />
@@ -146,14 +148,29 @@
     <Compile Include="Assets\Scripts\TreeSharp\Switch.cs" />
     <Compile Include="Assets\Scripts\TreeSharp\TestBehaviour.cs" />
     <Compile Include="Assets\Scripts\TreeSharp\Wait.cs" />
+    <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\ImportBehaviour.cs" />
+    <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\SortingLayerExposed.cs" />
+    <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TileAnimator.cs" />
+    <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TiledInitialShaderProperties.cs" />
+    <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TiledMap.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\DOTween\DOTween.XML" />
     <None Include="Assets\DOTween\DOTween43.xml" />
     <None Include="Assets\DOTween\DOTween46.xml" />
-    <None Include="Assets\DOTween\DOTween50.xml" />
     <None Include="Assets\DOTween\Editor\DOTweenEditor.XML" />
     <None Include="Assets\DOTween\readme.txt" />
+    <None Include="Assets\Tiled2Unity\Imported\_ReadMe.txt" />
+    <None Include="Assets\Tiled2Unity\Imported\desertMap.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\forest-mod01.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\License.txt" />
+    <None Include="Assets\Tiled2Unity\Materials\_ReadMe.txt" />
+    <None Include="Assets\Tiled2Unity\Meshes\_ReadMe.txt" />
+    <None Include="Assets\Tiled2Unity\Prefabs\_ReadMe.txt" />
+    <None Include="Assets\Tiled2Unity\Shaders\shaColorKey.shader" />
+    <None Include="Assets\Tiled2Unity\Shaders\shaDefault.shader" />
+    <None Include="Assets\Tiled2Unity\Shaders\shaTiledMap.shader" />
+    <None Include="Assets\Tiled2Unity\Textures\_ReadMe.txt" />
+    <None Include="Assets\Tiled2Unity\Tiled2Unity.export.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>

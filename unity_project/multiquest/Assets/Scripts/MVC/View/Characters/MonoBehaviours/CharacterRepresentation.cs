@@ -155,9 +155,9 @@ namespace MVC.View.Characters.MonoBehaviours
                 && Mathf.Abs(collision.contacts[0].point.y - collision.contacts[1].point.y) < 1)
             {
                 foreach (var item in this.blockedDirections.Where(e => e.Collider == collision.collider).ToArray())
-	            {
-		            this.blockedDirections.Remove(item);
-	            }
+                {
+                    this.blockedDirections.Remove(item);
+                }
 
                 if(!this.wasStayRemoveBefore.Contains(collision.collider))
                     this.wasStayRemoveBefore.Add(collision.collider);
@@ -175,9 +175,9 @@ namespace MVC.View.Characters.MonoBehaviours
                 this.wasStayRemoveBefore.Remove(collision.collider);
             
             foreach (var item in this.blockedDirections.Where(e => e.Collider == collision.collider).ToArray())
-	        {
-		        this.blockedDirections.Remove(item);
-	        }
+            {
+                this.blockedDirections.Remove(item);
+            }
         }
 
         #endregion
@@ -194,7 +194,7 @@ namespace MVC.View.Characters.MonoBehaviours
             this.nextActionPossible = false;
 
             this.moveAnimator.SetTrigger("Attack" + direction);
-            
+
             this.StartCoroutine(this.WaitForNextAction(this.attackTime));
         }
     }

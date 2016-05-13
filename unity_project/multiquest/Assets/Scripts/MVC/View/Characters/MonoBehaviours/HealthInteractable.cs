@@ -1,4 +1,5 @@
-﻿using MVC.View.Bases;
+﻿using System.Collections;
+using MVC.View.Bases;
 using UnityEngine;
 
 namespace MVC.View.Characters.MonoBehaviours
@@ -17,14 +18,22 @@ namespace MVC.View.Characters.MonoBehaviours
 
         public void Interact(GameObject interactGameObject)
         {
-            Debug.Log("interact");
             WeaponRepresentation weapon = interactGameObject.GetComponent<WeaponRepresentation>();
             if(weapon != null)
             {
                 this.actualHealth -= weapon.damagePerHit;
                 if (this.actualHealth <= 0)
-                    this.gameObject.SetActive(false);
+                {
+                    this.transform.position += Vector3.one * 100000;
+                    this.StartCoroutine(this.WaitToHide());
+                }
             }
+        }
+
+        private IEnumerator WaitToHide()
+        {
+            yield return new WaitForSeconds(1);
+            this.gameObject.SetActive(false);
         }
     }
 }
