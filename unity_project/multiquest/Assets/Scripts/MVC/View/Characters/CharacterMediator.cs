@@ -18,11 +18,13 @@ namespace MVC.View.Characters
         protected override void Awake()
         {
             base.Awake();
-            this.characterProxy = this.Facade.GetProxy<CharacterProxy>();
+            
         }
 
         private void Start()
         {
+            this.characterProxy = this.Facade.GetProxy<CharacterProxy>();
+
             for (int i = 0; i < 1; i++)
             {
                 this.CreateNewCharacter(this.characterPrefab, i);
