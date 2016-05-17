@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MVC.View.Characters.AI;
 using MVC.View.Characters.MonoBehaviours;
 
 namespace MVC.Model.Character
@@ -8,11 +9,11 @@ namespace MVC.Model.Character
     {
         public event Action<PlayerRepresentation> PlayerAdded;
         public event Action<PlayerRepresentation> PlayerRemoved;
-        public event Action<CharacterRepresentation> EnemyAdded;
-        public event Action<CharacterRepresentation> EnemyRemoved;
+        public event Action<NPCRepresentation> EnemyAdded;
+        public event Action<NPCRepresentation> EnemyRemoved;
 
         public readonly List<PlayerRepresentation> Players = new List<PlayerRepresentation>();
-        public readonly List<CharacterRepresentation> Enemies = new List<CharacterRepresentation>();
+        public readonly List<NPCRepresentation> Enemies = new List<NPCRepresentation>();
 
         public void AddPlayer(PlayerRepresentation player)
         {
@@ -36,7 +37,7 @@ namespace MVC.Model.Character
             }
         }
 
-        public void AddEnemy(CharacterRepresentation enemy)
+        public void AddEnemy(NPCRepresentation enemy)
         {
             if (!this.Enemies.Contains(enemy))
             { 
@@ -47,7 +48,7 @@ namespace MVC.Model.Character
             }
         }
 
-        public void RemoveEnemy(CharacterRepresentation enemy)
+        public void RemoveEnemy(NPCRepresentation enemy)
         {
             if (this.Enemies.Contains(enemy))
             { 

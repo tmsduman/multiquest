@@ -132,6 +132,7 @@
     <Compile Include="Assets\Scripts\MVC\MultiquestInitializer.cs" />
     <Compile Include="Assets\Scripts\MVC\UnityUpdateHandler.cs" />
     <Compile Include="Assets\Scripts\MVC\View\Bases\IInteractableRepresentation.cs" />
+    <Compile Include="Assets\Scripts\MVC\View\Bases\Notifications\MapFinishedNotification.cs" />
     <Compile Include="Assets\Scripts\MVC\View\Camera\GameCameraMediator.cs" />
     <Compile Include="Assets\Scripts\MVC\View\Characters\AI\Behaviours\AbstractAction.cs" />
     <Compile Include="Assets\Scripts\MVC\View\Characters\AI\Behaviours\AttackAction.cs" />
@@ -143,9 +144,14 @@
     <Compile Include="Assets\Scripts\MVC\View\Characters\Data\RepresentationPossibleDirections.cs" />
     <Compile Include="Assets\Scripts\MVC\View\Characters\EnemyMediator.cs" />
     <Compile Include="Assets\Scripts\MVC\View\Characters\MonoBehaviours\CharacterRepresentation.cs" />
+    <Compile Include="Assets\Scripts\MVC\View\Characters\MonoBehaviours\EnemySpawnPoint.cs" />
     <Compile Include="Assets\Scripts\MVC\View\Characters\MonoBehaviours\HealthInteractable.cs" />
     <Compile Include="Assets\Scripts\MVC\View\Characters\MonoBehaviours\PlayerRepresentation.cs" />
     <Compile Include="Assets\Scripts\MVC\View\Characters\MonoBehaviours\WeaponRepresentation.cs" />
+    <Compile Include="Assets\Scripts\MVC\View\Map\MapMediator.cs" />
+    <Compile Include="Assets\Scripts\MVC\View\Map\MonoBehaviours\MapExitRepresentation.cs" />
+    <Compile Include="Assets\Scripts\MVC\View\Map\Notifications\LoadMapNotification.cs" />
+    <Compile Include="Assets\Scripts\MVC\View\Map\Notifications\MapLoadedNotification.cs" />
     <Compile Include="Assets\Scripts\TreeSharp\Action.cs" />
     <Compile Include="Assets\Scripts\TreeSharp\BehaviourTest.cs" />
     <Compile Include="Assets\Scripts\TreeSharp\BehaviourTreeManager.cs" />
@@ -188,6 +194,7 @@
     <None Include="Assets\Tiled2Unity\Imported\forest-mod11.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\Imported\forest-mod12.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\Imported\forest-mod13.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\forest-mod14.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\Imported\forest-mod15.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\Imported\forest-mod16.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\License.txt" />

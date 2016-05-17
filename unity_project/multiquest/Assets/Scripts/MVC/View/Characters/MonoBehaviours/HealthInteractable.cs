@@ -30,6 +30,12 @@ namespace MVC.View.Characters.MonoBehaviours
             }
         }
 
+        public void Kill()
+        {
+            this.transform.position += Vector3.one * 100000;
+            this.StartCoroutine(this.WaitToHide());
+        }
+
         private IEnumerator WaitToHide()
         {
             yield return new WaitForSeconds(1);

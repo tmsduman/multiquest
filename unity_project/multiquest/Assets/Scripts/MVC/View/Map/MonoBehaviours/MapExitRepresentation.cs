@@ -15,10 +15,20 @@ namespace MVC.View.Map.MonoBehaviours
 
         public void Interact(GameObject gameObject)
         {
-            if(gameObject.GetComponent<MVC.View.Characters.MonoBehaviours.PlayerRepresentation>() != null)
+            this.CheckInteractGameObject(gameObject);
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            this.CheckInteractGameObject(collision.collider.gameObject);
+        }
+
+        private void CheckInteractGameObject(GameObject gameObject)
+        {
+            if (gameObject.GetComponent<MVC.View.Characters.MonoBehaviours.PlayerRepresentation>() != null)
             {
                 if (this.facade != null)
-                    this.facade.SendNotification(new MVC.View.Map.Notifications.LoadMapNotification());
+                    this.facade.SendNotification(new MVC.View.Bases.Notifications.MapFinishedNotification());
             }
         }
     }

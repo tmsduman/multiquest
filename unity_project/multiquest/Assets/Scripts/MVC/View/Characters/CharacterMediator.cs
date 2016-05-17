@@ -1,4 +1,6 @@
-﻿using MVC.Controller.Input.Notifications;
+﻿using System.Collections;
+using System.Collections.Generic;
+using MVC.Controller.Input.Notifications;
 using MVC.Model.Character;
 using MVC.View.Characters.MonoBehaviours;
 using UnityEngine;
@@ -26,6 +28,32 @@ namespace MVC.View.Characters
             this.CreateAllCharacter();
         }
 
+        public override void BeforeRegister()
+        {
+            this.RegisterNotification<MVC.View.Bases.Notifications.MapFinishedNotification>(n => 
+            {
+                List<PlayerRepresentation> tempPlayerList = new List<PlayerRepresentation>(this.characterProxy.Players);
+
+                for (int i = 0; i < tempPlayerList.Count; i++)
+                {
+                    
+                    this.PlayerKilled(tempPlayerList[i]);
+                    tempPlayerList[i].gameObject.SetActive(false);
+                }
+
+                this.StartCoroutine(this.WaitToDestroyObsoletePlayers(tempPlayerList));
+            });
+        }
+
+        private IEnumerator WaitToDestroyObsoletePlayers(List<PlayerRepresentation> players)
+        {
+            yield return new WaitForSeconds(1);
+            for (int i = 0; i < players.Count; i++)
+            {
+                DestroyImmediate(players[i].gameObject);
+            }
+        }
+
         private void CreateAllCharacter()
         {
             for (int i = 0; i < 2; i++)
@@ -39,7 +67,7 @@ namespace MVC.View.Characters
             PlayerRepresentation representation = Instantiate<PlayerRepresentation>(representationPrefab);
             representation.CachedTransform.SetParent(this.characterParent);
             representation.CachedTransform.localScale = Vector3.one;
-            representation.CachedTransform.localPosition = new Vector3(1,1,0) * id * 2;
+            representation.CachedTransform.localPosition = new Vector3(1,0,0) * id;
 
             representation.SetCamera(this.gameCamera);
             representation.Killed += this.PlayerKilled;
@@ -163,27 +191,30 @@ namespace MVC.View.Characters
             this.SendNotification(new UnregisterInputCommandNotification() { InputName = "Down" + representation.InputId });
 
             if (this.characterProxy.Players.Count <= 0)
+            {
+                //this.SendNotification(new MVC.View.Bases.Notifications.MapFinishedNotification());
                 this.CreateAllCharacter();
+            }
         }
 
         private void OnGUI()
         {
-            GUILayout.BeginVertical();
-            for (int i = 0;i < 20; i++) 
-            {
+            //GUILayout.BeginVertical();
+            //for (int i = 0;i < 20; i++) 
+            //{
 
-                if (Input.GetKeyDown("joystick 1 button " + i))
-                {
-                    GUILayout.Label("joystick 1 button " + i);
-                }
+            //    if (Input.GetKeyDown("joystick 1 button " + i))
+            //    {
+            //        GUILayout.Label("joystick 1 button " + i);
+            //    }
 
-                 if (Input.GetAxis("1_X axis " + i) != 0)
-                 {
-                     GUILayout.Label("1_X axis " + i);
-                 }
+            //     if (Input.GetAxis("1_X axis " + i) != 0)
+            //     {
+            //         GUILayout.Label("1_X axis " + i);
+            //     }
                  
-            }
-            GUILayout.EndVertical();
+            //}
+            //GUILayout.EndVertical();
         }
     }
 }

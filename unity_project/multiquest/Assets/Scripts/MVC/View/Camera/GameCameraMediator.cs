@@ -9,6 +9,9 @@ namespace MVC.View.Camera
     public class GameCameraMediator : PureMVCImplementations.UnityMonoBehaviourMediator<GameCameraMediator>
     {
         [SerializeField]
+        private UnityEngine.Camera gameCamera;
+
+        [SerializeField]
         private Transform cameraTransform;
 
         [SerializeField]
@@ -16,6 +19,8 @@ namespace MVC.View.Camera
 
         private CharacterProxy characterProxy;
         private List<PlayerRepresentation> registeredPlayers = new List<PlayerRepresentation>();
+
+        private Vector4 borders;
 
         private void Start()
         {
@@ -27,8 +32,126 @@ namespace MVC.View.Camera
             {
                 this.AddPlayer(player);
             }
+        }
 
-            this.HandlePlayerMoved();
+        public override void BeforeRegister()
+        {
+            this.RegisterNotification<MVC.View.Map.Notifications.MapLoadedNotification>(n =>
+            {
+                this.borders = Vector4.zero;
+
+                Vector3 currentPos = this.cameraTransform.position;
+                
+
+                float interval = 0.1f;
+                
+                Ray ray;
+
+
+                this.cameraTransform.position = new Vector3(10, 0, this.cameraTransform.position.z);
+                this.borders.x = 10;
+                // left
+                while (true)
+                {
+                    this.cameraTransform.position -= new Vector3(interval, 0, 0);
+                    ray = this.gameCamera.ViewportPointToRay(Vector3.zero);
+
+                    bool mapHitted = false;
+                    foreach (var hit in Physics.RaycastAll(ray))
+                    {
+                        if (hit.collider.gameObject.tag == "Map")
+                        {
+                            mapHitted = true;
+                            break;
+                        }
+                    }
+
+                    if (mapHitted)
+                        this.borders.x -= interval;
+                    else
+                        break;
+                }
+
+                this.cameraTransform.position = new Vector3(-10, 0, this.cameraTransform.position.z);
+                this.borders.y = -10;
+                // right
+                while (true)
+                {
+                    this.cameraTransform.position += new Vector3(interval, 0, 0);
+                    ray = this.gameCamera.ViewportPointToRay(Vector3.one);
+
+                    Debug.DrawRay(ray.origin, ray.direction * 1000, Color.blue, 100);
+
+                    bool mapHitted = false;
+                    foreach (var hit in Physics.RaycastAll(ray))
+                    {
+                        if (hit.collider.gameObject.tag == "Map")
+                        {
+                            mapHitted = true;
+                            break;
+                        }
+                    }
+
+                    if (mapHitted)
+                        this.borders.y += interval;
+                    else
+                        break;
+                }
+
+                this.cameraTransform.position = new Vector3(-10, -10, this.cameraTransform.position.z);
+                this.borders.w = -10;
+                // top
+                while (true)
+                {
+                    this.cameraTransform.position += new Vector3(0, interval, 0);
+                    ray = this.gameCamera.ViewportPointToRay(Vector3.one);
+
+                    bool mapHitted = false;
+                    foreach (var hit in Physics.RaycastAll(ray))
+                    {
+                        if (hit.collider.gameObject.tag == "Map")
+                        {
+                            mapHitted = true;
+                            break;
+                        }
+                    }
+
+                    if (mapHitted)
+                        this.borders.w += interval;
+                    else
+                        break;
+                }
+
+                this.cameraTransform.position = new Vector3(0, 10, this.cameraTransform.position.z);
+                this.borders.z = 10;
+                // bottom
+                while (true)
+                {
+                    this.cameraTransform.position -= new Vector3(0, interval, 0);
+                    ray = this.gameCamera.ViewportPointToRay(Vector3.zero);
+
+                    bool mapHitted = false;
+                    foreach (var hit in Physics.RaycastAll(ray))
+                    {
+                        if (hit.collider.gameObject.tag == "Map")
+                        {
+                            mapHitted = true;
+                            break;
+                        }
+                    }
+
+                    if (mapHitted)
+                        this.borders.z -= interval;
+                    else
+                        break;
+                }
+
+                //Debug.Log("borders " + this.borders);
+
+                this.cameraTransform.position = currentPos;
+
+                this.HandlePlayerMoved();
+            });
         }
 
         private void AddPlayer(PlayerRepresentation player)
@@ -76,8 +199,8 @@ namespace MVC.View.Camera
             
             this.cameraTransform.DOMove(
                 new Vector3(
-                    minValues.x + ((maxValues.x - minValues.x) * 0.5f),
-                    minValues.y + ((maxValues.y - minValues.y) * 0.5f),
+                    Mathf.Min(this.borders.y, Mathf.Max(this.borders.x, minValues.x + ((maxValues.x - minValues.x) * 0.5f))),
+                    Mathf.Min(this.borders.w, Mathf.Max(this.borders.z, minValues.y + ((maxValues.y - minValues.y) * 0.5f))),
                     this.cameraTransform.position.z),
                 this.moveTime);
         }

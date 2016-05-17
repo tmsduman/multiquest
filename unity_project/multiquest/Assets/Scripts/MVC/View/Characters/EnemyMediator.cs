@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using MVC.Model.Character;
 using MVC.View.Characters.AI;
 using MVC.View.Characters.MonoBehaviours;
@@ -18,8 +19,7 @@ namespace MVC.View.Characters
         [SerializeField]
         private BehaviourTreeManager manager;
 
-        [SerializeField]
-        private List<Vector3> possibleSpawnPoints;
+        
 
         [SerializeField]
         private int minEnemiesOnMap;
@@ -31,14 +31,43 @@ namespace MVC.View.Characters
 
         private System.Random random;
         private int lastSpawnPointIndex;
+        private List<Vector3> possibleSpawnPoints;
 
-        private void Start()
+        protected override void Awake()
         {
-            //return;
-
             this.random = new System.Random();
             this.characterProxy = this.Facade.GetProxy<CharacterProxy>();
-            this.CreateEnemies();
+            base.Awake();
+        }
+
+        public override void BeforeRegister()
+        {
+            this.RegisterNotification<MVC.View.Map.Notifications.MapLoadedNotification>(n =>
+            {
+                this.possibleSpawnPoints = n.EnemySpawnPoints;
+                this.lastSpawnPointIndex = 0;
+
+                List<NPCRepresentation> tempNPCList = new List<NPCRepresentation>(this.characterProxy.Enemies);
+
+                for (int i = 0; i < tempNPCList.Count; i++)
+                {
+                    tempNPCList[i].gameObject.SetActive(false);
+                    this.RemoveRepresentation(tempNPCList[i]);
+                }
+
+                this.StartCoroutine(this.WaitToDestroyObsoleteEnemies(tempNPCList));
+
+                this.CreateEnemies();
+            });
+        }
+
+        private IEnumerator WaitToDestroyObsoleteEnemies(List<NPCRepresentation> players)
+        {
+            yield return new WaitForSeconds(1);
+            for (int i = 0; i < players.Count; i++)
+            {
+                DestroyImmediate(players[i].gameObject);
+            }
         }
 
         private void CreateEnemies()
@@ -68,11 +97,16 @@ namespace MVC.View.Characters
 
         private void EnemyKilled(CharacterRepresentation representation)
         {
-            representation.Killed -= this.EnemyKilled;
-            this.characterProxy.RemoveEnemy(representation as NPCRepresentation);
+            this.RemoveRepresentation(representation);
 
             if (this.characterProxy.Enemies.Count < this.minEnemiesOnMap)
                 this.CreateEnemies();
+        }
+
+        private void RemoveRepresentation(CharacterRepresentation representation)
+        {
+            representation.Killed -= this.EnemyKilled;
+            this.characterProxy.RemoveEnemy(representation as NPCRepresentation);
         }
     }
 }

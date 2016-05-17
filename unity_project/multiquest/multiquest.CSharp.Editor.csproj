@@ -159,6 +159,7 @@
     <None Include="Assets\Tiled2Unity\Imported\forest-mod11.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\Imported\forest-mod12.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\Imported\forest-mod13.tiled2unity.xml" />
+    <None Include="Assets\Tiled2Unity\Imported\forest-mod14.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\Imported\forest-mod15.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\Imported\forest-mod16.tiled2unity.xml" />
     <None Include="Assets\Tiled2Unity\License.txt" />

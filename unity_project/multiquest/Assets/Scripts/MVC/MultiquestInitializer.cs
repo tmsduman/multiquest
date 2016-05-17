@@ -26,6 +26,16 @@ namespace MVC
             this.InitializeMediators();
         }
 
+        public override void Update()
+        {
+            base.Update();
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                Application.Quit();
+                return;
+            }
+        }
+
         private void InitializeProxies()
         {
             this.Facade.RegisterProxy(new MVC.Model.Character.CharacterProxy());
